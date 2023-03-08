@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Method Test</title> 
+    <link rel="stylesheet" href="/css/methodtest.css"> 
+  </head>
+  <body>
+    <main>
+      <form>
+        <button id="postBtn" type="button">post</button>
+        <button id="getBtn" type="button">get</button>
+        <button id="putBtn" type="button">put</button>
+        <button id="deleteBtn" type="button">delete</button>
+      </form>
+      <output id="resOutput"></output>
+    </main>
+    <script type="module">
+      import { postForm, getForm, putForm } from '/js/methodtest.js'
+
+      window.addEventListener('DOMContentLoaded', init);
+
+      function init() {
+        let postBtn = document.querySelector('#postBtn');
+        postBtn.addEventListener('click', () => {
+          let resOutput = document.querySelector('#resOutput');
+          resOutput.style.visibility = 'hidden';
+          postForm();
+        });
+
+        let getBtn = document.querySelector('#getBtn');
+        getBtn.addEventListener('click', () => {
+          let resOutput = document.querySelector('#resOutput');
+          resOutput.style.visibility = 'hidden';
+          getForm();
+        });
+
+        let putBtn = document.querySelector('#putBtn');
+        putBtn.addEventListener('click', () => {
+          let resOutput = document.querySelector('#resOutput');
+          resOutput.style.visibility = 'hidden';
+          putForm();
+        });
+      }
+    </script>
+  </body>
+</html>
