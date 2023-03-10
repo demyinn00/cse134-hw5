@@ -7,7 +7,7 @@
   </head>
   <body>
     <main>
-      <form>
+      <form id="requestForm">
         <button id="postBtn" type="button">post</button>
         <button id="getBtn" type="button">get</button>
         <button id="putBtn" type="button">put</button>
@@ -15,33 +15,35 @@
       </form>
       <output id="resOutput"></output>
     </main>
-    <script type="module">
+    <script src="/js/main.js" type="module"></script>
+    
+    <!-- <script type="module">
       import { postForm, getForm, putForm } from '/js/methodtest.js'
 
       window.addEventListener('DOMContentLoaded', init);
 
       function init() {
-        let postBtn = document.querySelector('#postBtn');
+        const postBtn = document.querySelector('#postBtn');
         postBtn.addEventListener('click', () => {
           let resOutput = document.querySelector('#resOutput');
           resOutput.style.visibility = 'hidden';
           postForm();
         });
 
-        let getBtn = document.querySelector('#getBtn');
+        const getBtn = document.querySelector('#getBtn');
         getBtn.addEventListener('click', () => {
           let resOutput = document.querySelector('#resOutput');
           resOutput.style.visibility = 'hidden';
           getForm();
         });
 
-        let putBtn = document.querySelector('#putBtn');
+        const putBtn = document.querySelector('#putBtn');
         putBtn.addEventListener('click', () => {
           let resOutput = document.querySelector('#resOutput');
           resOutput.style.visibility = 'hidden';
           putForm();
         });
       }
-    </script>
+    </script> -->
   </body>
 </html>

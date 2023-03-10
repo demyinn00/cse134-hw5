@@ -1,3 +1,5 @@
+import { postHandler, getHandler, putHandler, deleteHandler } from './handlers.js'
+
 async function postForm() {
   let postDialog = document.createElement('dialog');
   postDialog.innerHTML = `
@@ -18,30 +20,8 @@ async function postForm() {
   postDialog.showModal();
 
   let sendBtn = document.querySelector('#sendBtn');
-  sendBtn.addEventListener('click', async () => {
-    const id = document.querySelector('#id').value;
-    const articleName = document.querySelector('#articleName').value;
-    const articleBody = document.querySelector('#articleBody').value;
-    const date = new Date().toLocaleDateString("en-US");
-    const url = "https://httpbin.org/post";
-
-    try {
-      let response = await fetch(url, {
-        method: 'POST',
-        body: JSON.stringify({
-          id,
-          articleName,
-          articleBody,
-          date
-        })
-      });
-      let data = await response.text();
-      resOutput.innerText = data;
-      resOutput.style.visibility = 'visible';
-    } catch (err) {
-      console.error(`Error: ${err}`)
-    }
-  });
+  sendBtn.removeEventListener('click', postHandler);
+  sendBtn.addEventListener('click', postHandler);
 }
 
 async function getForm() {
@@ -59,32 +39,13 @@ async function getForm() {
   getDialog.showModal();
 
   let sendBtn = document.querySelector('#sendBtn');
-  sendBtn.addEventListener('click', async () => {
-    console.log('clicked send inside get!')
-    const id = document.querySelector('#id').value;
-    const url = `https://httpbin.org/get?id=${id}`;
-
-    let resOutput = document.querySelector('#resOutput');
-
-    try {
-      let response = await fetch(url, {
-        method: 'GET'
-      });
-      if (!response.ok) {
-        throw new Error('Failed GET');
-      }
-      let data = await response.text();
-      resOutput.innerText = data;
-      resOutput.style.visibility = 'visible';
-    } catch (err) {
-      console.error(`Error: ${err}`)
-    }
-  });
+  sendBtn.removeEventListener('click', getHandler);
+  sendBtn.addEventListener('click', getHandler);
 }
 
 async function putForm() {
-  let putForm = document.createElement('dialog');
-  putForm.innerHTML = `
+  let putDialog = document.createElement('dialog');
+  putDialog.innerHTML = `
     <form method="dialog" class="dialogForm">
       <label for="id">ID:</label>
       <input type="text" id="id" name="id">
@@ -98,34 +59,31 @@ async function putForm() {
     </form>
   `;
 
-  document.body.appendChild(putForm);
-  putForm.showModal();
+  document.body.appendChild(putDialog);
+  putDialog.showModal();
 
   let sendBtn = document.querySelector('#sendBtn');
-  sendBtn.addEventListener('click', async () => {
-    const id = document.querySelector('#id').value;
-    const articleName = document.querySelector('#articleName').value;
-    const articleBody = document.querySelector('#articleBody').value;
-    const date = new Date().toLocaleDateString("en-US");
-    const url = `https://httpbin.org/put?id=${id}`;
-
-    try {
-      let response = await fetch(url, {
-        method: 'PUT',
-        body: JSON.stringify({
-          id,
-          articleName,
-          articleBody,
-          date
-        })
-      });
-      let data = await response.text();
-      resOutput.innerText = data;
-      resOutput.style.visibility = 'visible'; 
-    } catch (err) {
-      console.error(`Error: ${err}`)
-    }
-  });
+  sendBtn.removeEventListener('click', putHandler);
+  sendBtn.addEventListener('click', putHandler);
 }
 
-export { postForm, getForm, putForm };
+async function deleteForm() {
+  let deleteDialog = document.createElement('dialog');
+  deleteDialog.innerHTML = `
+    <form method="dialog" class="dialogForm">
+      <label for="id">ID:</label>
+      <input type="text" id="id" name="id">
+      <button type="submit" id="cancelBtn">Cancel</button>
+      <button type="submit" id="sendBtn">Send</button>
+    </form>
+  `;
+
+  document.body.appendChild(deleteDialog);
+  deleteDialog.showModal();
+
+  let sendBtn = document.querySelector('#sendBtn');
+  sendBtn.removeEventListener('click', deleteHandler);
+  sendBtn.addEventListener('click', deleteHandler);
+}
+
+export { postForm, getForm, putForm, deleteForm };
